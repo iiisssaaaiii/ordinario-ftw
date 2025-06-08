@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chipotle Accesible - Menú</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navegación principal -->
+  <header role="banner">
+    <nav role="navigation" aria-label="Menú principal">
+      <ul class="nav-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="menu.html" aria-current="page">MENÚ</a></li>
+        <li><a href="orden.html">ORDENA YA</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main role="main">
+    <h1>Menú</h1>
+
+    <section>
+      <h2>Platillos disponibles</h2>
+      <p>A continuación se muestra nuestro menú. Usa Tab para navegar por los elementos.</p>
+
+      <table id="tabla-productos" role="table" aria-label="Tabla de productos disponibles">
+        <thead>
+          <tr>
+            <th scope="col">Imagen</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se llenará dinámicamente con JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer role="contentinfo">
+    <p>&copy; 2025 Chipotle Accesible. Proyecto educativo para FTW.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

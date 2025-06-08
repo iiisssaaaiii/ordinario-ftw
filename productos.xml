@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+  <producto>
+    <nombre>Burrito de Pollo</nombre>
+    <descripcion>Pollo marinado, arroz, frijoles negros, queso y pico de gallo</descripcion>
+    <precio>99</precio>
+    <imagen>img/burrito.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Tazón Vegetariano</nombre>
+    <descripcion>Arroz integral, frijoles, guacamole, verduras asadas y lechuga</descripcion>
+    <precio>109</precio>
+    <imagen>img/tazon.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Quesadilla de Carne</nombre>
+    <descripcion>Quesadilla de queso con carne asada y salsa de chipotle</descripcion>
+    <precio>115</precio>
+    <imagen>img/quesadilla.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Tacos Mixtos</nombre>
+    <descripcion>Trío de tacos con carne al gusto, cebolla, cilantro y limón</descripcion>
+    <precio>105</precio>
+    <imagen>img/tacos.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Agua de Jamaica</nombre>
+    <descripcion>Bebida natural fría sin conservadores ni azúcar añadida</descripcion>
+    <precio>35</precio>
+    <imagen>img/jamaica.jpg</imagen>
+  </producto>
+</menu>

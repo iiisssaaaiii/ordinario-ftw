@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chipotle Accesible - Inicio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Video de fondo -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="img/videoIndex.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Capa oscura -->
+  <div class="overlay"></div>
+
+  <!-- Contenedor principal -->
+  <div class="page-content">
+
+    <!-- Navegación superior -->
+    <header role="banner">
+      <nav role="navigation" aria-label="Menú principal">
+        <ul class="nav-list">
+          <li><a href="index.html" aria-current="page">INICIO</a></li>
+          <li><a href="menu.html">MENÚ</a></li>
+          <li><a href="orden.html">ORDENA YA</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contenido central -->
+    <main role="main" class="hero-content">
+      <span class="nuevo">NUEVO</span>
+      <h1>BURRITO DE<br><strong>POLLO</strong></h1>
+      <h2>CHIPOTLE PICANTE CON UN TOQUE DULCE</h2>
+      <p>
+        Pollo recién asado marinado con chiles chipotle y un toque de miel pura. Por tiempo limitado.
+      </p>
+      <button onclick="window.location.href='orden.html?producto=Burrito%20de%20Pollo'">ORDENAR AHORA</button>
+    </main>
+
+    <!-- Pie de página -->
+    <footer role="contentinfo">
+      <p>&copy; 2025 Chipotle Accesible. Proyecto educativo para FTW.</p>
+    </footer>
+
+  </div> <!-- /.page-content -->
+
+</body>
+</html>
