@@ -9,7 +9,7 @@
 <body>
 
   <!-- Video de fondo -->
-  <video autoplay muted loop playsinline id="bg-video">
+    <video autoplay muted loop playsinline id="bg-video" aria-hidden="true">  
     <source src="img/videoIndex.mp4" type="video/mp4" />
   </video>
 
@@ -25,7 +25,7 @@
         <ul class="nav-list">
           <li><a href="index.html" aria-current="page">INICIO</a></li>
           <li><a href="menu.html">MENÚ</a></li>
-          <li><a href="orden.html">ORDENA YA</a></li>
+          <li><a href="carrito.html">CARRITO</a></li>
         </ul>
       </nav>
     </header>
@@ -38,12 +38,34 @@
       <p>
         Pollo recién asado marinado con chiles chipotle y un toque de miel pura. Por tiempo limitado.
       </p>
-      <button onclick="window.location.href='orden.html?producto=Burrito%20de%20Pollo'">ORDENAR AHORA</button>
+      <button id="ordenar-index">ORDENAR AHORA</button>
+
+<script>
+  document.getElementById("ordenar-index").addEventListener("click", () => {
+    const nuevoProducto = {
+      producto: "Burrito de Pollo (Promoción)",
+      ingredientes: {
+        tortilla: ["Harina"],
+        carne: ["Pollo"],
+        salsa: ["Chipotle con miel"]
+      },
+      comentarios: "Promoción fija - sin modificaciones"
+    };
+
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.push(nuevoProducto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    // Redirigir al carrito
+    window.location.href = "carrito.html";
+  });
+</script>
+
     </main>
 
     <!-- Pie de página -->
     <footer role="contentinfo">
-      <p>&copy; 2025 Chipotle Accesible. Proyecto educativo para FTW.</p>
+      <p>&copy; 2025 Chipotle Accesible. Proyecto Isai</p>
     </footer>
 
   </div> <!-- /.page-content -->

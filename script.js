@@ -44,15 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
         celdaPrecio.setAttribute("role", "cell");
         celdaPrecio.textContent = `$${precio}`;
 
-        // Botón de ordenar
+        // Botón "Construye tu [nombre]"
         const celdaBoton = document.createElement("td");
         const boton = document.createElement("button");
-        boton.textContent = "Ordenar";
+        boton.textContent = `Construye tu ${nombre}`;
         boton.onclick = function () {
           const productoParam = encodeURIComponent(nombre);
-          window.location.href = `orden.html?producto=${productoParam}`;
+          window.location.href = `construye.html?producto=${productoParam}`;
         };
-        boton.setAttribute("aria-label", `Ordenar ${nombre}`);
+        boton.setAttribute("aria-label", `Construir ${nombre}`);
         celdaBoton.appendChild(boton);
 
         // Agregar a la fila

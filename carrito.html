@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de Pedido</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header role="banner">
+    <nav role="navigation" aria-label="Menú principal">
+      <ul class="nav-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="menu.html">MENÚ</a></li>
+        <li><a href="carrito.html" aria-current="page">CARRITO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main role="main">
+    <h1>Tu Carrito</h1>
+    <p>Aquí puedes revisar los platillos que has agregado y finalizar tu pedido.</p>
+
+    <!-- Contenedor ARIA oculto para lectores de pantalla -->
+    <div id="lector-carrito" aria-live="polite" style="position: absolute; left: -9999px;"></div>
+
+    <section id="carrito-container"></section>
+
+    <button id="finalizar-btn">Finalizar pedido</button>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Chipotle Accesible. Proyecto Isai</p>
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const contenedor = document.getElementById("carrito-container");
+    const lector = document.getElementById("lector-carrito");
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    if (carrito.length === 0) {
+      contenedor.innerHTML = "<p>No hay productos en tu carrito.</p>";
+      lector.textContent = "Tu carrito está vacío.";
+      document.getElementById("finalizar-btn").style.display = "none";
+      return;
+    }
+
+    let resumenLector = `Tienes ${carrito.length} producto${carrito.length === 1 ? "" : "s"} en tu carrito. `;
+
+    carrito.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.classList.add("item-carrito");
+
+      const ingredientesStr = Object.entries(item.ingredientes)
+        .map(([k, v]) => `${k}: ${v.join(", ")}`)
+        .join(" | ");
+
+      const h2 = document.createElement("h2");
+      h2.textContent = item.producto;
+
+      if (item.producto.includes("Promoción")) {
+        h2.classList.add("promocion");
+      }
+
+      const pIngredientes = document.createElement("p");
+      pIngredientes.innerHTML = `<strong>Ingredientes:</strong> ${ingredientesStr}`;
+
+      const pComentarios = document.createElement("p");
+      pComentarios.innerHTML = `<strong>Comentarios:</strong> ${item.comentarios || "Ninguno"}`;
+
+      const botonEliminar = document.createElement("button");
+      botonEliminar.textContent = "Eliminar";
+      botonEliminar.setAttribute("aria-label", `Eliminar ${item.producto}`);
+      botonEliminar.onclick = () => eliminar(index);
+
+      const hr = document.createElement("hr");
+
+      div.appendChild(h2);
+      div.appendChild(pIngredientes);
+      div.appendChild(pComentarios);
+      div.appendChild(botonEliminar);
+      div.appendChild(hr);
+
+      contenedor.appendChild(div);
+
+      // Resumen accesible
+      const resumenIngredientes = Object.entries(item.ingredientes)
+        .map(([k, v]) => `${k}: ${v.join(", ")}`)
+        .join(". ");
+      resumenLector += `Producto ${index + 1}: ${item.producto}. Ingredientes: ${resumenIngredientes}. Comentarios: ${item.comentarios || "Ninguno"}. `;
+    });
+
+    lector.textContent = resumenLector;
+  });
+
+  function eliminar(index) {
+    if (confirm("¿Estás seguro de eliminar este producto del carrito?")) {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      location.reload();
+    }
+  }
+
+  document.getElementById("finalizar-btn").addEventListener("click", () => {
+    window.location.href = "envio.html";
+  });
+  </script>
+
+</body>
+</html>

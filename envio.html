@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalizar pedido</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header role="banner">
+    <nav role="navigation" aria-label="Menú principal">
+      <ul class="nav-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="menu.html">MENÚ</a></li>
+        <li><a href="carrito.html">CARRITO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main role="main">
+    <h1>Finalizar pedido</h1>
+    <div aria-live="polite"></div>
+    <section>
+      <h2>Resumen de tu carrito</h2>
+      <div id="resumen-carrito">
+        <!-- Aquí se cargan los productos del carrito -->
+      </div>
+    </section>
+
+    <form id="form-envio">
+      <fieldset>
+        <legend>Datos de entrega</legend>
+
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" name="calle" required />
+
+        <label for="numExt">Número exterior:</label>
+        <input type="text" id="numExt" name="numExt" required />
+
+        <label for="numInt">Número interior (opcional):</label>
+        <input type="text" id="numInt" name="numInt" />
+
+        <label for="colonia">Colonia:</label>
+        <input type="text" id="colonia" name="colonia" required />
+
+        <label>Método de pago:</label>
+        <div>
+          <input type="radio" id="efectivo" name="pago" value="Efectivo" required />
+          <label for="efectivo">Efectivo</label>
+
+          <input type="radio" id="tarjeta" name="pago" value="Tarjeta" />
+          <label for="tarjeta">Tarjeta</label>
+        </div>
+
+        <label for="referencias">Referencias de la vivienda:</label>
+        <textarea id="referencias" name="referencias" rows="2" placeholder="Ej. Casa con fachada naranja"></textarea>
+
+        <button type="submit">Confirmar pedido</button>
+      </fieldset>
+    </form>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Chipotle Accesible. Proyecto Isai</p>
+  </footer>
+
+  <script>
+    // Mostrar resumen del carrito
+    document.addEventListener("DOMContentLoaded", () => {
+      const resumen = document.getElementById("resumen-carrito");
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+      if (carrito.length === 0) {
+        resumen.innerHTML = "<p>No hay productos en el carrito.</p>";
+        document.getElementById("form-envio").style.display = "none";
+        return;
+      }
+
+      carrito.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.classList.add("item-carrito");
+
+        const ingredientesStr = Object.entries(item.ingredientes)
+          .map(([k, v]) => `${k}: ${v.join(", ")}`)
+          .join(" | ");
+
+        div.innerHTML = `
+          <h3>${item.producto}</h3>
+          <p><strong>Ingredientes:</strong> ${ingredientesStr}</p>
+          <p><strong>Comentarios:</strong> ${item.comentarios || "Ninguno"}</p>
+          <hr />
+        `;
+
+        resumen.appendChild(div);
+      });
+    });
+
+    // Enviar formulario
+    document.getElementById("form-envio").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const calle = document.getElementById("calle").value;
+      const numExt = document.getElementById("numExt").value;
+      const numInt = document.getElementById("numInt").value;
+      const colonia = document.getElementById("colonia").value;
+      const pago = document.querySelector('input[name="pago"]:checked')?.value;
+      const referencias = document.getElementById("referencias").value;
+
+      const direccion = `Calle ${calle}, No. Ext. ${numExt}${numInt ? ', Int. ' + numInt : ''}, Col. ${colonia}`;
+
+      alert(
+        `¡Pedido confirmado!\n\nNombre: ${nombre}\nDirección: ${direccion}\nPago: ${pago}\nReferencias: ${referencias || "Ninguna"}`
+      );
+
+      localStorage.removeItem("carrito");
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>

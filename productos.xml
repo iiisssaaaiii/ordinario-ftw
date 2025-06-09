@@ -10,7 +10,7 @@
     <nombre>Tazón Vegetariano</nombre>
     <descripcion>Arroz integral, frijoles, guacamole, verduras asadas y lechuga</descripcion>
     <precio>109</precio>
-    <imagen>img/tazon.jpg</imagen>
+    <imagen>img/tazonVegetariano.jpg</imagen>
   </producto>
   <producto>
     <nombre>Quesadilla de Carne</nombre>

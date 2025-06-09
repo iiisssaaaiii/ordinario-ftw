@@ -193,7 +193,7 @@ label {
 
 input[type="text"],
 textarea,
-input[type="range"] {
+input[type="number"] {
   width: 100%;
   padding: 0.6rem;
   border: 1px solid #ccc;
@@ -306,6 +306,41 @@ button[type="submit"]:focus {
   background-color: #b22222;
 }
 
+.item-carrito {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+}
+
+.item-carrito h2 {
+  margin-bottom: 0.5rem;
+}
+
+.item-carrito button {
+  background-color: #d22b2b;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item-carrito button:hover {
+  background-color: #a72222;
+}
+
+.item-carrito h2.promocion {
+  color: #b22222;
+  font-style: italic;
+}
+
+.promocion {
+  color: #b22222;
+  font-style: italic;
+  font-weight: bold;
+}
 
 
 

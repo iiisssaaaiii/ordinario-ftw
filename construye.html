@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Construye tu platillo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navegación -->
+  <header role="banner">
+    <nav role="navigation" aria-label="Menú principal">
+      <ul class="nav-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="menu.html">MENÚ</a></li>
+        <li><a href="carrito.html">CARRITO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 id="titulo">Construye tu platillo</h1>
+
+    <form id="form-ingredientes">
+      <div id="ingredientes-container">
+        <!-- Aquí se insertan los ingredientes según el platillo -->
+      </div>
+
+      <label for="comentarios">Comentarios adicionales:</label>
+      <textarea id="comentarios" name="comentarios" rows="3" placeholder="Ej. Sin cebolla, extra queso..."></textarea>
+
+      <button type="submit">Agregar al pedido</button>
+    </form>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Chipotle Accesible. Proyecto educativo para FTW.</p>
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const producto = decodeURIComponent(params.get("producto") || "");
+    document.getElementById("titulo").textContent = `Construye tu ${producto}`;
+    const container = document.getElementById("ingredientes-container");
+
+const opciones = {
+  "Burrito de Pollo": `
+    <label>Tipo de tortilla:</label>
+    <select name="tortilla">
+      <option>Harina</option>
+      <option>Maíz</option>
+      <option>Espinaca</option>
+    </select>
+
+    <label>Tipo de carne:</label>
+    <select name="carne">
+      <option>Pollo</option>
+      <option>Res</option>
+      <option>Pastor</option>
+      <option>Sin carne</option>
+    </select>
+
+    <label>Vegetales:</label>
+    <div>
+      <label><input type="checkbox" name="vegetales" value="Cebolla" /> Cebolla</label>
+      <label><input type="checkbox" name="vegetales" value="Jitomate" /> Jitomate</label>
+      <label><input type="checkbox" name="vegetales" value="Lechuga" /> Lechuga</label>
+      <label><input type="checkbox" name="vegetales" value="Pimientos" /> Pimientos</label>
+    </div>
+
+    <label><input type="checkbox" name="queso" value="Sí" /> Incluir queso</label>
+  `,
+
+  "Tazón Vegetariano": `
+    <label>Tipo de arroz:</label>
+    <select name="arroz">
+      <option>Blanco</option>
+      <option>Integral</option>
+      <option>Sin arroz</option>
+    </select>
+
+    <label>Proteína vegetal:</label>
+    <select name="proteina">
+      <option>Tofu</option>
+      <option>Champiñones</option>
+      <option>Soja</option>
+    </select>
+
+    <label>Vegetales:</label>
+    <div>
+      <label><input type="checkbox" name="vegetales" value="Lechuga" /> Lechuga</label>
+      <label><input type="checkbox" name="vegetales" value="Zanahoria" /> Zanahoria</label>
+      <label><input type="checkbox" name="vegetales" value="Cebolla" /> Cebolla</label>
+      <label><input type="checkbox" name="vegetales" value="Brócoli" /> Brócoli</label>
+    </div>
+  `,
+
+  "Quesadilla de Carne": `
+    <label>Tipo de carne:</label>
+    <select name="carne">
+      <option>Carne Asada</option>
+      <option>Pastor</option>
+      <option>Pollo</option>
+    </select>
+
+    <label>Tipo de queso:</label>
+    <select name="queso">
+      <option>Cheddar</option>
+      <option>Monterrey</option>
+      <option>Sin queso</option>
+    </select>
+
+    <label>Extras:</label>
+    <div>
+      <label><input type="checkbox" name="extras" value="Salsa Chipotle" /> Salsa Chipotle</label>
+      <label><input type="checkbox" name="extras" value="Guacamole" /> Guacamole</label>
+    </div>
+  `,
+
+  "Tacos Mixtos": `
+    <label>Tipo de tortilla:</label>
+    <select name="tortilla">
+      <option>Maíz</option>
+      <option>Harina</option>
+    </select>
+
+    <label>Tipo de carne (elige hasta 3):</label>
+    <div>
+      <label><input type="checkbox" name="carne" value="Pastor" /> Pastor</label>
+      <label><input type="checkbox" name="carne" value="Bistec" /> Bistec</label>
+      <label><input type="checkbox" name="carne" value="Chorizo" /> Chorizo</label>
+      <label><input type="checkbox" name="carne" value="Pollo" /> Pollo</label>
+    </div>
+
+    <label>Vegetales:</label>
+    <div>
+      <label><input type="checkbox" name="vegetales" value="Cebolla" /> Cebolla</label>
+      <label><input type="checkbox" name="vegetales" value="Cilantro" /> Cilantro</label>
+      <label><input type="checkbox" name="vegetales" value="Limón" /> Limón</label>
+    </div>
+  `,
+
+  "Agua de Jamaica": `
+    <p>Este producto no requiere personalización. Puedes dejar un comentario adicional si lo deseas.</p>
+  `
+};
+
+
+    container.innerHTML = opciones[producto] || "<p>Este platillo no tiene ingredientes configurados aún.</p>";
+
+    document.getElementById("form-ingredientes").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const datos = new FormData(e.target);
+  const ingredientes = {};
+
+  for (const [key, value] of datos.entries()) {
+    if (!ingredientes[key]) ingredientes[key] = [];
+    ingredientes[key].push(value);
+  }
+
+  const comentarios = document.getElementById("comentarios").value;
+
+  const pedido = {
+    producto,
+    ingredientes,
+    comentarios
+  };
+
+  // Obtener pedidos previos
+  const pedidosGuardados = JSON.parse(localStorage.getItem("carrito")) || [];
+  pedidosGuardados.push(pedido);
+  localStorage.setItem("carrito", JSON.stringify(pedidosGuardados));
+
+  // Redirigir al carrito
+  window.location.href = "carrito.html";
+});
+
+  });
+</script>
+
+</body>
+</html>

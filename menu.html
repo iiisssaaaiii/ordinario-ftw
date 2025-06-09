@@ -14,7 +14,7 @@
       <ul class="nav-list">
         <li><a href="index.html">INICIO</a></li>
         <li><a href="menu.html" aria-current="page">MENÚ</a></li>
-        <li><a href="orden.html">ORDENA YA</a></li>
+        <li><a href="carrito.html">CARRITO</a></li>
       </ul>
     </nav>
   </header>
@@ -23,29 +23,34 @@
   <main role="main">
     <h1>Menú</h1>
 
-    <section>
-      <h2>Platillos disponibles</h2>
-      <p>A continuación se muestra nuestro menú. Usa Tab para navegar por los elementos.</p>
+    <section aria-labelledby="titulo-platillos">
+      <h2 id="titulo-platillos">Platillos disponibles</h2>
+      <p>Se muestra una tabla con imagen, nombre, descripción y precio de los productos. Usa Tab o comandos del lector de pantalla para navegar por las celdas.</p>
 
-      <table id="tabla-productos" role="table" aria-label="Tabla de productos disponibles">
-        <thead>
-          <tr>
-            <th scope="col">Imagen</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Precio</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Se llenará dinámicamente con JS -->
-        </tbody>
-      </table>
+      <div role="region" aria-label="Lista de platillos en tabla">
+        <table id="tabla-productos" role="table" aria-describedby="descripcion-tabla">
+          <caption id="descripcion-tabla">Menú accesible con información visual y textual de cada producto.</caption>
+          <thead>
+  <tr role="row">
+    <th scope="col" role="columnheader">Imagen</th>
+    <th scope="col" role="columnheader">Nombre</th>
+    <th scope="col" role="columnheader">Descripción</th>
+    <th scope="col" role="columnheader">Precio</th>
+    <th scope="col" role="columnheader">Acción</th>
+  </tr>
+</thead>
+
+          <tbody>
+            <!-- Contenido generado por script.js -->
+          </tbody>
+        </table>
+      </div>
     </section>
   </main>
 
   <!-- Pie de página -->
   <footer role="contentinfo">
-    <p>&copy; 2025 Chipotle Accesible. Proyecto educativo para FTW.</p>
+    <p>&copy; 2025 Chipotle Accesible. Proyecto Isai</p>
   </footer>
 
   <script src="script.js"></script>
